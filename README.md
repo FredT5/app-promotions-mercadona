@@ -20,6 +20,7 @@ symfony check:requirements
 
 ```bash
 symfony serve -d
+```
 
 ### Lancer des tests
 
