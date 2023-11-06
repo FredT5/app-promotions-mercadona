@@ -2,10 +2,6 @@
 
 App Promotions Mercadona est une web application pour gérer et afficher en ligne les promotions sur les produits Mercadona
 
-# App Promotions Mercadona
-
-App Promotions Mercadona est une web application pour gérer et afficher en ligne les promotions sur les produits Mercadona
-
 ## Environnement de développement
 
 ### Pré-requis
@@ -24,3 +20,9 @@ symfony check:requirements
 
 ```bash
 symfony serve -d
+
+### Lancer des tests
+
+```bash
+php bin/phpunit --testdox
+```
