@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+{% set route_name = app.current_route %}
+
+{% block title %}{% if category is defined %}{{category.name}}{% else %}Nuestros productos{% endif %}{% endblock %}
+
+{% block body %}
+
+    <!-- Header -->
+    <header class="bg-dark py-2" id="header-product-list">
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="text-center text-white">
+                <h1 class="display-4 fw-bolder">{% if category is defined %}{{category.name}}{% else %}Nuestros productos{% endif %}</h1>
+                <p class="lead fw-normal text-white-70 mb-0">Descubra las promociones vigentes</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Section -->
+    <section class="py-2">
+        <div class="container px-4 px-lg-5 mt-5">
+
+            <!-- Categories list -->
+            <div class="justify-content-center mb-4">
+                <a href="{{path('category_all_list')}}" 
+                   class="btn {% if route_name == 'category_all_list' %} btn-success {% else %} btn-outline-secondary {% endif %} btn-sm">
+                   Todos
+                </a>
+            {% for category in categories %}
+                <a href="{{path('category_list', {slug: category.slug})}}"
+                   class="btn {% if slug is defined and slug == category.slug %} btn-success {% else %} btn-outline-secondary {% endif %} btn-sm">
+                   {{category.name}}
+                </a>
+            {% endfor %}
+            </div>
+
+            <!-- Products list -->
+            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+            {% for product in products %}
+                <div class="col mb-5">
+                    <div class="card h-100">
+                        <!-- Product image -->
+                        <img class="card-img-top" src="{{asset(product.image)}}" alt="..." />
+                        <!-- Product details -->
+                        <div class="card-body p-4">
+                            <div class="text-center">
+                                <!-- Product category -->
+                                <small class="text-success">{{product.category.name}}</small>
+                                <!-- Product name -->
+                                <h5 class="fw-bolder">{{product.name}}</h5>
+                                <!-- Product description -->
+                                <p>{{product.description}}</p>
+                                <!-- Product price -->
+                                <span {% if product.discount > 0 %}class="text-danger fw-bolder"{% endif %}>{{(product.price / 100) |number_format(2, ',', '')}} €</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            </div>
+
+        </div>
+    </section>
+
+{% endblock %}

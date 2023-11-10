@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use App\Repository\ProductRepository;
-use App\Trait\CreatedAtTrait;
 use App\Trait\SlugTrait;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
@@ -11,7 +10,6 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
 class Product
 {
-    use CreatedAtTrait;
     use SlugTrait;
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -27,7 +25,7 @@ class Product
     #[ORM\Column]
     private ?int $price = null;
 
-    #[ORM\Column(nullable: true, options : ['default'=> '0'])]
+    #[ORM\Column(nullable: true, options: ['default' => 0])]
     private ?int $discount = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]

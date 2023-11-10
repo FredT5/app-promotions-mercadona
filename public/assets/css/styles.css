@@ -3,3 +3,8 @@
   background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5)),
                     url("../images/banner-mercadona.jpg");
 }
+#header-product-list {
+  background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.5)),
+                    url("../images/banner-mercadona.jpg");
+  background-position: bottom;
+}

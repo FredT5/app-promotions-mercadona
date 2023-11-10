@@ -24,7 +24,6 @@ class ProductTest extends TestCase
                 ->setDiscountStart($dateTime)
                 ->setDiscountEnd($dateTime)
                 ->setImage('image')
-                ->setCreatedAt($dateTimeImmutable)
                 ->setCategory($categorie)
                 ->setSlug('slug');
 
@@ -35,7 +34,6 @@ class ProductTest extends TestCase
         $this->assertTrue($product->getDiscountStart() === $dateTime);
         $this->assertTrue($product->getDiscountEnd() === $dateTime);
         $this->assertTrue($product->getImage() === 'image');
-        $this->assertTrue($product->getCreatedAt() === $dateTimeImmutable);
         $this->assertTrue($product->getCategory() === $categorie);
         $this->assertTrue($product->getSlug() === 'slug');
     }
@@ -54,7 +52,6 @@ class ProductTest extends TestCase
                 ->setDiscountStart($dateTime)
                 ->setDiscountEnd($dateTime)
                 ->setImage('image')
-                ->setCreatedAt($dateTimeImmutable)
                 ->setCategory($categorie)
                 ->setSlug('slug');
 
@@ -65,7 +62,6 @@ class ProductTest extends TestCase
         $this->assertFalse($product->getDiscountStart() === new DateTime());
         $this->assertFalse($product->getDiscountEnd() === new DateTime());
         $this->assertFalse($product->getImage() === 'false');
-        $this->assertFalse($product->getCreatedAt() === new DateTimeImmutable());
         $this->assertFalse($product->getCategory() === new Category(), );
         $this->assertFalse($product->getSlug() === 'false');
     }
@@ -81,7 +77,6 @@ class ProductTest extends TestCase
         $this->assertEmpty($product->getDiscountStart());
         $this->assertEmpty($product->getDiscountEnd());
         $this->assertEmpty($product->getImage());
-        $this->assertEmpty($product->getCreatedAt());
         $this->assertEmpty($product->getCategory());
     }
 }
