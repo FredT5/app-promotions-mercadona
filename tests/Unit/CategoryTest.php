@@ -3,6 +3,7 @@
 namespace App\Tests\Unit;
 
 use App\Entity\Category;
+use App\Entity\Product;
 use PHPUnit\Framework\TestCase;
 
 class CategoryTest extends TestCase
@@ -38,5 +39,27 @@ class CategoryTest extends TestCase
 
         $this->assertEmpty($category->getName());
         $this->assertEmpty($category->getSlug());
+        $this->assertEmpty($category->getId());
+    }
+
+    public function testAddGetRemoveProduct()
+    {
+        // create a category
+        $category = new Category();
+        // create a product
+        $product = new Product();
+
+        // first, check that when it getProducts, it's empty
+        $this->assertEmpty($category->getProducts());
+
+        // then, when it addProduct
+        $category->addProduct($product);
+        // check that it now contains a product
+        $this->assertContains($product, $category->getProducts());
+
+        // and, when it removeProduct
+        $category->removeProduct($product);
+        // check that it's empty
+        $this->assertEmpty($category->getProducts());
     }
 }

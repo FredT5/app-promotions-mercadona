@@ -2,14 +2,17 @@
 
 namespace App\Entity;
 
-use App\Repository\UserRepository;
+use App\Repository\UsersRepository;
+use App\Trait\CreatedAtTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-#[ORM\Entity(repositoryClass: UserRepository::class)]
-class User implements UserInterface, PasswordAuthenticatedUserInterface
+#[ORM\Entity(repositoryClass: UsersRepository::class)]
+#[ORM\HasLifecycleCallbacks()]
+class Users implements UserInterface, PasswordAuthenticatedUserInterface
 {
+    use CreatedAtTrait;
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
@@ -28,10 +31,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $password = null;
 
     #[ORM\Column(length: 100)]
-    private ?string $firstname = null;
+    private ?string $Firstname = null;
 
     #[ORM\Column(length: 100)]
-    private ?string $lastname = null;
+    private ?string $Lastname = null;
 
     public function getId(): ?int
     {
@@ -105,26 +108,25 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getFirstname(): ?string
     {
-        return $this->firstname;
+        return $this->Firstname;
     }
 
-    public function setFirstname(string $firstname): static
+    public function setFirstname(string $Firstname): static
     {
-        $this->firstname = $firstname;
+        $this->Firstname = $Firstname;
 
         return $this;
     }
 
     public function getLastname(): ?string
     {
-        return $this->lastname;
+        return $this->Lastname;
     }
 
-    public function setLastname(string $lastname): static
+    public function setLastname(string $Lastname): static
     {
-        $this->lastname = $lastname;
+        $this->Lastname = $Lastname;
 
         return $this;
     }
 }
-

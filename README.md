@@ -1,35 +1,41 @@
 # App Promotions Mercadona
 
-App Promotions Mercadona est une web application pour gérer et afficher en ligne les promotions sur les produits Mercadona
+Mercadona Promotions App is a web application to manage and display promotions on Mercadona products online
 
-## Environnement de développement
+## Development environment
 
-### Pré-requis
+### Prerequisites
 
 * PHP 8.1
-* PostgreSQL 14
+* PostgreSQL
 * Symfony CLI
 
-Vous pouvez vérifier les pré-requis avec la commande (de la CLI Symfony) : 
+You can check the prerequisites with the command (from the Symfony CLI):
 
 ```bash
 symfony check:requirements
 ```
 
-### Lancer l'environnement de développement
+### Launch evelopment environment
 
 ```bash
 symfony serve -d
 ```
 
-### Afficher des données de test
+### Display test data
 
 ```bash
 symfony console doctrine:fixtures:load
 ```
 
-### Lancer des tests
+### Launch test
 
 ```bash
 php bin/phpunit --testdox
+```
+
+### Launch test coverage
+
+```bash
+php bin/phpunit --coverage-html var/log/test/test-coverage
 ```

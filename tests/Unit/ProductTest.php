@@ -5,7 +5,6 @@ namespace App\Tests\Unit;
 use App\Entity\Product;
 use App\Entity\Category;
 use DateTime;
-use DateTimeImmutable;
 use PHPUnit\Framework\TestCase;
 
 class ProductTest extends TestCase
@@ -14,7 +13,6 @@ class ProductTest extends TestCase
     {
         $product = new Product();
         $dateTime = new DateTime();
-        $dateTimeImmutable = new DateTimeImmutable();
         $categorie = new Category();
 
         $product->setName('nom')
@@ -42,7 +40,6 @@ class ProductTest extends TestCase
     {
         $product = new Product();
         $dateTime = new DateTime();
-        $dateTimeImmutable = new DateTimeImmutable();
         $categorie = new Category();
 
         $product->setName('nom')
@@ -78,5 +75,7 @@ class ProductTest extends TestCase
         $this->assertEmpty($product->getDiscountEnd());
         $this->assertEmpty($product->getImage());
         $this->assertEmpty($product->getCategory());
+        $this->assertEmpty($product->getSlug());
+        $this->assertEmpty($product->getId());
     }
 }

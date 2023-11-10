@@ -9,7 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('catalogo', name: 'category_')]
+#[Route('catalogue', name: 'category_')]
 class CategoryController extends AbstractController
 {
     #[Route('/', name: 'all_list')]

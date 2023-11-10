@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 {% set route_name = app.current_route %}
 
-{% block title %}{% if category is defined %}{{category.name}}{% else %}Nuestros productos{% endif %}{% endblock %}
+{% block title %}{% if category is defined %}{{category.name}}{% else %}Tous nos produits{% endif %}{% endblock %}
 
 {% block body %}
 
@@ -9,8 +9,8 @@
     <header class="bg-dark py-2" id="header-product-list">
         <div class="container px-4 px-lg-5 my-5">
             <div class="text-center text-white">
-                <h1 class="display-4 fw-bolder">{% if category is defined %}{{category.name}}{% else %}Nuestros productos{% endif %}</h1>
-                <p class="lead fw-normal text-white-70 mb-0">Descubra las promociones vigentes</p>
+                <h1 class="display-4 fw-bolder">{% if category is defined %}{{category.name}}{% else %}Tous nos produits{% endif %}</h1>
+                <p class="lead fw-normal text-white-70 mb-0">Découvrez les promotions en cours</p>
             </div>
         </div>
     </header>
@@ -23,7 +23,7 @@
             <div class="justify-content-center mb-4">
                 <a href="{{path('category_all_list')}}" 
                    class="btn {% if route_name == 'category_all_list' %} btn-success {% else %} btn-outline-secondary {% endif %} btn-sm">
-                   Todos
+                   Tous les produits
                 </a>
             {% for category in categories %}
                 <a href="{{path('category_list', {slug: category.slug})}}"
