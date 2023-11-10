@@ -9,9 +9,6 @@ trait CreatedAtTrait
     #[ORM\Column(options : ['default'=> 'CURRENT_TIMESTAMP'])]
     private ?\DateTimeImmutable $created_at = null;
 
-    #[ORM\Column(options : ['default'=> 'CURRENT_TIMESTAMP'])]
-    private ?\DateTimeImmutable $updated_at = null;
-
     public function getCreatedAt(): ?\DateTimeImmutable
     {
         return $this->created_at;
