@@ -7,7 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/producto', name: 'product_')]
+#[Route('/produit', name: 'product_')]
 class ProductController extends AbstractController
 {
     #[Route('/{slug}', name: 'detail')]

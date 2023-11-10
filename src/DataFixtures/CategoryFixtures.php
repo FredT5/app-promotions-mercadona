@@ -7,7 +7,9 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
-;
+/**
+ * @codeCoverageIgnore
+ */
 
 class CategoryFixtures extends Fixture
 {
@@ -16,12 +18,14 @@ class CategoryFixtures extends Fixture
 
     public function load(ObjectManager $manager): void
     {
-        $this->createCategory('Agua y refrescos', $manager);
-        $this->createCategory('Aperitivos', $manager);
-        $this->createCategory('Azúcar y chocolate', $manager);
-        $this->createCategory('Bebé', $manager);
-        $this->createCategory('Carne', $manager);
-        $this->createCategory('Marisco y pescado', $manager);
+        $this->createCategory('Boissons', $manager);
+        $this->createCategory('Apéritifs', $manager);
+        $this->createCategory('Epicerie sucrée', $manager);
+        $this->createCategory('Bébé', $manager);
+        $this->createCategory('Viandes', $manager);
+        $this->createCategory('Poissons', $manager);
+        // test category to test the category display
+        $this->createCategory('Test category', $manager);
 
         $manager->flush();
     }
@@ -33,7 +37,7 @@ class CategoryFixtures extends Fixture
         $category->setSlug($this->slugger->slug($category->getName())->lower());
         $manager->persist($category);
 
-        // stock réference pour la fixture product
+        // generate reference for product fixtures
         $this->addReference('cat-'.$this->counter, $category);
         $this->counter++;
 

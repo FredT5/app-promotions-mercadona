@@ -2,29 +2,38 @@
 
 namespace App\Tests\Unit;
 
-use App\Entity\User;
+use App\Entity\Users;
 use PHPUnit\Framework\TestCase;
 
-class UserTest extends TestCase
+
+class UsersTest extends TestCase
 {
     public function testIsTrue()
     {
-        $user = new User();
+        $user = new Users();
+        $dateCreatedAt = new \DateTimeImmutable();
+        $dateUpdatedAt = new \DateTime();
 
         $user->setEmail('true@test.com')
              ->setFirstname('prenom')
              ->setLastname('nom')
-             ->setPassword('password');
+             ->setPassword('password')
+             ->setRoles(['ROLE_TEST'])
+             ->setCreatedAt($dateCreatedAt)
+             ->setUpdatedAt($dateUpdatedAt);
 
         $this->assertTrue($user->getEmail() === 'true@test.com');
         $this->assertTrue($user->getFirstname() === 'prenom');
         $this->assertTrue($user->getLastname() === 'nom');
         $this->assertTrue($user->getPassword() === 'password');
+        $this->assertTrue($user->getRoles() === ['ROLE_TEST', 'ROLE_USER']);
+        $this->assertTrue($user->getCreatedAt() === $dateCreatedAt);
+        $this->assertTrue($user->getUpdatedAt() === $dateUpdatedAt);
     }
 
     public function testIsFalse()
     {
-        $user = new User();
+        $user = new Users();
 
         $user->setEmail('true@test.com')
              ->setFirstname('prenom')
@@ -39,7 +48,7 @@ class UserTest extends TestCase
 
     public function testIsEmpty()
     {
-        $user = new User();
+        $user = new Users();
 
         $user->setEmail('')
              ->setFirstname('')
@@ -50,5 +59,6 @@ class UserTest extends TestCase
         $this->assertEmpty($user->getFirstname());
         $this->assertEmpty($user->getLastname());
         $this->assertEmpty($user->getPassword());
+        $this->assertEmpty($user->getId());
     }
 }
