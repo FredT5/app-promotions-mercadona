@@ -28,9 +28,9 @@ class ProductFixtures extends Fixture
             $product->setName(rtrim($faker->text(15),"."))
                     ->setDescription($faker->text(100))
                     ->setSlug($this->slugger->slug($product->getName())->lower())
-                    ->setPrice($faker->numberBetween(300,15000))
-                    ->setImage('assets/images/agua-1.jpg')
-                    ->setDiscount(0);
+                    ->setPrice($faker->randomFloat(2, 1, 300))
+                    ->setImage('agua-1.jpg')
+                    ->setDiscount($faker->numberBetween(0, 1));
 
             //find randomly categories references
             $category = $this->getReference('cat-'.rand(1,6));
@@ -45,8 +45,8 @@ class ProductFixtures extends Fixture
         $product->setName('Test product')
                 ->setDescription($faker->text(100))
                 ->setSlug($this->slugger->slug($product->getName())->lower())
-                ->setPrice($faker->numberBetween(300,15000))
-                ->setImage('assets/images/agua-1.jpg')
+                ->setPrice(19.99)
+                ->setImage('azucar-1.jpg')
                 ->setDiscount(0)
                 ->setCategory($this->getReference('cat-7'));
 

@@ -17,7 +17,7 @@ class ProductTest extends TestCase
 
         $product->setName('nom')
                 ->setDescription('description')
-                ->setPrice(2599)
+                ->setPrice('25.99')
                 ->setDiscount(10)
                 ->setDiscountStart($dateTime)
                 ->setDiscountEnd($dateTime)
@@ -27,7 +27,7 @@ class ProductTest extends TestCase
 
         $this->assertTrue($product->getName() === 'nom');
         $this->assertTrue($product->getDescription() === 'description');
-        $this->assertTrue($product->getPrice() === 2599);
+        $this->assertTrue($product->getPrice() === '25.99');
         $this->assertTrue($product->getDiscount() === 10);
         $this->assertTrue($product->getDiscountStart() === $dateTime);
         $this->assertTrue($product->getDiscountEnd() === $dateTime);
@@ -44,7 +44,7 @@ class ProductTest extends TestCase
 
         $product->setName('nom')
                 ->setDescription('description')
-                ->setPrice(2599)
+                ->setPrice('25.99')
                 ->setDiscount(10)
                 ->setDiscountStart($dateTime)
                 ->setDiscountEnd($dateTime)
@@ -54,7 +54,7 @@ class ProductTest extends TestCase
 
         $this->assertFalse($product->getName() === 'false');
         $this->assertFalse($product->getDescription() === 'false');
-        $this->assertFalse($product->getPrice() === 2220);
+        $this->assertFalse($product->getPrice() === '22.20');
         $this->assertFalse($product->getDiscount() === 20);
         $this->assertFalse($product->getDiscountStart() === new DateTime());
         $this->assertFalse($product->getDiscountEnd() === new DateTime());

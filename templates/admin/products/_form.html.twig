@@ -1,0 +1,23 @@
+{{form_start(productForm)}}
+    <div class="row">
+        {{form_row(productForm.name)}}
+        {{form_row(productForm.description)}}
+        <div class="col">
+            {{form_row(productForm.price)}}
+        </div>
+        <div class="col">
+            {{form_row(productForm.discount)}}
+            {{form_row(productForm.discount_start)}}
+            {{form_row(productForm.discount_end)}}
+        </div>
+        {{form_row(productForm.category)}}
+        <div class="mb-3">
+        {{form_label(productForm.image)}}
+        {{form_widget(productForm.image)}}
+        <small>Formats jpg, jpeg, gif ou png. Taille maximum 100 ko.</small>
+        </div>
+        <div class="d-grid gap-2 col-6 mx-auto mt-2">
+            <button type="submit" class="btn btn-primary btn-lg">{{button_label |default('Ajouter')}}</button>
+        </div>
+    </div>
+{{form_end(productForm)}}
