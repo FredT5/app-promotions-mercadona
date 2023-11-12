@@ -45,6 +45,39 @@ class ProductsController extends AbstractController
 
         //check if form is submitted and valid
         if($productForm->isSubmitted() && $productForm->isValid()) {
+            
+            //discount controls
+            $discount = $product->getDiscount();
+            $discountStart = $product->getDiscountStart();
+            $discountEnd = $product->getDiscountEnd();
+            // if there is a discount...
+            if ($discount >0){
+                // ...but start date is missing 
+                if (!$discountStart && $discountEnd){
+                    // discount will be scheduled for 1 day : the discount end date
+                    $product->setDiscountStart($discountEnd);
+                }
+                // ...but end date is missing 
+                else if ($discountStart && !$discountEnd){
+                    // discount will be scheduled for 1 day : the discount start date
+                    $product->setDiscountEnd($discountStart);
+                }
+                // ...but both date are missing
+                else if (!$discountStart && !$discountEnd){
+                    //reset discount
+                    $product->setDiscount(0);
+                    $product->setDiscountStart(null);
+                    $product->setDiscountEnd(null);
+                }
+            }            
+            // if there is no discount
+            if ($discount == 0){
+                //reset discount
+                $product->setDiscount(0);
+                $product->setDiscountStart(null);
+                $product->setDiscountEnd(null);
+            }
+
             //generate slug with the product name
             $slug = $slugger->slug($product->getName())->lower();
             $product->setSlug($slug);
@@ -76,6 +109,8 @@ class ProductsController extends AbstractController
                 $product->setImage($newFilename);
             }
 
+            
+
             // persist the $product variable or any other work
             $entityManager->persist($product);
             $entityManager->flush();
@@ -101,6 +136,7 @@ class ProductsController extends AbstractController
         SluggerInterface $slugger
     ): Response
     {
+
         //create form
         $productForm = $this->createForm(ProductFormType::class, $product);
 
@@ -109,6 +145,38 @@ class ProductsController extends AbstractController
 
         //check if form is submitted and valid
         if($productForm->isSubmitted() && $productForm->isValid()) {
+            //discount controls
+            $discount = $product->getDiscount();
+            $discountStart = $product->getDiscountStart();
+            $discountEnd = $product->getDiscountEnd();
+            // if there is a discount...
+            if ($discount >0){
+                // ...but start date is missing 
+                if (!$discountStart && $discountEnd){
+                    // discount will be scheduled for 1 day : the discount end date
+                    $product->setDiscountStart($discountEnd);
+                }
+                // ...but end date is missing 
+                else if ($discountStart && !$discountEnd){
+                    // discount will be scheduled for 1 day : the discount start date
+                    $product->setDiscountEnd($discountStart);
+                }
+                // ...but both date are missing
+                else if (!$discountStart && !$discountEnd){
+                    //reset discount
+                    $product->setDiscount(0);
+                    $product->setDiscountStart(null);
+                    $product->setDiscountEnd(null);
+                }
+            }            
+            // if there is no discount
+            if ($discount == 0){
+                //reset discount
+                $product->setDiscount(0);
+                $product->setDiscountStart(null);
+                $product->setDiscountEnd(null);
+            }
+
             //generate slug with the product name
             $slug = $slugger->slug($product->getName())->lower();
             $product->setSlug($slug);
@@ -157,8 +225,28 @@ class ProductsController extends AbstractController
     }
 
     #[Route('/delete/{id}', name: 'delete')]
-    public function delete(Product $product): Response
+    public function delete(
+        Product $product,
+        EntityManagerInterface $entityManager
+    ): Response
     {
+        // if product exists
+        if($product){
+            // delete product
+            $entityManager->remove($product);
+            // execute transaction
+            $entityManager->flush();
+            // and display success message
+            $this->addFlash('success', 'Produit supprimé avec succès');
+        } 
+        // if there isn't a product with this id
+        else {
+            // display error message
+            $this->addFlash('success', 'Le produit n\'existe pas.');
+        }
+        //redirect to products list
+        return $this->redirectToRoute('admin_products_index');
+
         return $this->render('admin/products/index.html.twig', [
             
         ]);

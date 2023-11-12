@@ -1,4 +1,4 @@
-{{form_start(productForm)}}
+{{form_start(productForm, {'attr': {'novalidate': 'novalidate'}})}}
     <div class="row">
         {{form_row(productForm.name)}}
         {{form_row(productForm.description)}}
@@ -14,7 +14,7 @@
         <div class="mb-3">
         {{form_label(productForm.image)}}
         {{form_widget(productForm.image)}}
-        <small>Formats jpg, jpeg, gif ou png. Taille maximum 100 ko.</small>
+        <small>Formats jpg, jpeg, gif ou png. Taille 600x600 px. Poids maximum 100 ko.</small>
         </div>
         <div class="d-grid gap-2 col-6 mx-auto mt-2">
             <button type="submit" class="btn btn-primary btn-lg">{{button_label |default('Ajouter')}}</button>
