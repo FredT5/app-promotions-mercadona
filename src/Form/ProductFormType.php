@@ -14,6 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\File;
+use Symfony\Component\Validator\Constraints\Image;
 
 class ProductFormType extends AbstractType
 {
@@ -72,14 +73,27 @@ class ProductFormType extends AbstractType
                     new File([
                         'maxSize' => '100k',
                         'maxSizeMessage' => 'Image trop lourde, il ne faut pas dépassé 100 ko.',
-                        'mimeTypes' => [
-                            'image/jpg',
-                            'image/jpeg',
-                            'image/png',
-                            'image/gif'
-
+                        'extensions' => [
+                            'jpg',
+                            'jpeg',
+                            'png',
+                            'gif'
                         ],
                         'mimeTypesMessage' => 'Format d\'image incorrect. Les formats jpg, jpeg, png et gif sont autorisés.',
+                    ]),
+                    new Image([
+                        'allowLandscape' => false,
+                        'allowLandscapeMessage' =>'L\'image doit être au format carré',
+                        'allowPortrait' => false,
+                        'allowPortraitMessage' =>'L\'image doit être au format carré',
+                        'minWidth' => 600,
+                        'minWidthMessage' =>'L\'image doit avoir une taille de 600 x 600 px',
+                        'maxWidth' => 600,
+                        'maxWidthMessage' =>'L\'image doit avoir une taille de 600 x 600 px',
+                        'minHeight' => 600,
+                        'minHeightMessage' =>'L\'image doit avoir une taille de 600 x 600 px',
+                        'maxHeight' => 600,
+                        'maxHeightMessage' =>'L\'image doit avoir une taille de 600 x 600 px'
                     ])
                 ],
             ])

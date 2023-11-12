@@ -3,6 +3,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Product;
+use DateTime;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\String\Slugger\SluggerInterface;
@@ -30,7 +31,7 @@ class ProductFixtures extends Fixture
                     ->setSlug($this->slugger->slug($product->getName())->lower())
                     ->setPrice($faker->randomFloat(2, 1, 300))
                     ->setImage('agua-1.jpg')
-                    ->setDiscount($faker->numberBetween(0, 1));
+                    ->setDiscount(0);
 
             //find randomly categories references
             $category = $this->getReference('cat-'.rand(1,6));
