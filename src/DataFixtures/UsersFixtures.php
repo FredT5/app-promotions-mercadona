@@ -40,7 +40,8 @@ class UsersFixtures extends Fixture
             $user->setEmail("user$i@yopmail.com")
                  ->setFirstname($faker->firstName)
                  ->setLastname($faker->lastName)
-                 ->setPassword($this->passwordEncoder->hashPassword($user, 'user!'));
+                 ->setPassword($this->passwordEncoder->hashPassword($user, 'user!'))
+                 ->setRoles(['ROLE_PRODUCT_ADMIN']);
 
             $manager->persist($user);
         }

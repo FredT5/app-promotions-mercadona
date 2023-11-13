@@ -2,3 +2,5 @@
 {{asset('')}}
 
 {{path('')}}
+
+{% if product.discountStart | date <= "now" | date and product.discountEnd | date >= "now" | date %}

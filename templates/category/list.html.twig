@@ -50,7 +50,7 @@
                                 <!-- Product description -->
                                 <p>{{ product.description|u.truncate(100, '...', false) }}</p>
                                 <!-- Product price -->
-                                <span {% if product.discount > 0 %}class="text-danger fw-bolder"{% endif %}>{{(product.price) |number_format(2, ',', '')}} €</span>
+                                <span {% if (product.discount > 0) and (product.discountStart | date <= "now" | date) and (product.discountEnd | date >= "now" | date) %}class="text-danger fw-bolder"{% endif %}>{{(product.price) |number_format(2, ',', '')}} €</span>
                             </div>
                         </div>
                     </div>

@@ -1,5 +1,10 @@
 {% extends 'base.html.twig' %}
 
+{% block javascripts %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="{{asset('assets/js/admin-products.js')}}"></script>
+{% endblock %}
+
 {% block title %}Modifier un produit{% endblock %}
 
 {% block body %}
