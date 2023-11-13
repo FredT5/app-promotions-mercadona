@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Category;
 use App\Repository\CategoryRepository;
 use App\Repository\ProductRepository;
+use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -41,20 +42,4 @@ class CategoryController extends AbstractController
             'slug' => $slug,
         ]);
     }
-
-    /* #[Route('/{slug}', name: 'list')]
-    public function list(Category $category, CategoryRepository $categoryRepository, $slug): Response
-    {
-        // find products of the category
-        $products = $category->getProducts();
-        // find all categories
-        $categories = $categoryRepository->findBy([], ['id' => 'ASC']);
-
-        return $this->render('category/list.html.twig', [
-            'category' => $category,
-            'products' => $products,
-            'categories' => $categories,
-            'slug' => $slug,
-        ]);
-    } */
 }

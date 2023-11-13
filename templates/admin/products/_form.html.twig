@@ -3,17 +3,39 @@
         {{form_row(productForm.name)}}
         {{form_row(productForm.description)}}
         <div class="col">
-            {{form_row(productForm.price)}}
+            <div class="mb-3">
+            {{form_label(productForm.price)}}
+            {{form_widget(productForm.price, {'type': 'number'}) }}
+            {{form_errors(productForm.price)}}
+            <span id="product_form_price_help" class="text-danger" style="display:none;">Prix remisé : <strong><span id="product_form_price_discount"></span> €</strong></span>
+            </div>
         </div>
         <div class="col">
-            {{form_row(productForm.discount)}}
-            {{form_row(productForm.discount_start)}}
-            {{form_row(productForm.discount_end)}}
+            <label class="mt-2" for="">&nbsp;</label><br/>
+            <span class="btn btn-outline-danger" id="btDiscount">Promotion</span>
+            <div id="product_form_hidden_input_discount" style="display:none;">
+                <div class="mb-3">
+                {{form_label(productForm.discount)}}
+                {{form_widget(productForm.discount)}}
+                {{form_errors(productForm.discount)}}
+                </div>
+                <div class="mb-3">
+                {{form_label(productForm.discount_start)}}
+                {{form_widget(productForm.discount_start)}}
+                {{form_errors(productForm.discount_start)}}
+                </div>
+                <div class="mb-3">
+                {{form_label(productForm.discount_end)}}
+                {{form_widget(productForm.discount_end)}}
+                {{form_errors(productForm.discount_end)}}
+                </div>
+            </div>
         </div>
         {{form_row(productForm.category)}}
         <div class="mb-3">
         {{form_label(productForm.image)}}
         {{form_widget(productForm.image)}}
+        {{form_errors(productForm.image)}}
         <small>Formats jpg, jpeg, gif ou png. Taille 600x600 px. Poids maximum 100 ko.</small>
         </div>
         <div class="d-grid gap-2 col-6 mx-auto mt-2">

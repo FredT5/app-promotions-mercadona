@@ -31,7 +31,7 @@ class ProductFormType extends AbstractType
                 'currency' => 'EUR',
                 'attr' => [
                     'min' => '0.00',
-                    'max' => '1000.00',
+                    'max' => '9999.99',
                     'step' => '0.01'
                 ]
             ])
