@@ -19,7 +19,7 @@ class CategoryController extends AbstractController
         // find all products
         $products = $productRepository->findBy([], ['updated_at' => 'DESC']);
         // find all categories
-        $categories = $categoryRepository->findBy([], ['id' => 'ASC']);
+        $categories = $categoryRepository->findBy([], ['name' => 'ASC']);
 
         return $this->render('category/list.html.twig', [
             'products' => $products,
@@ -33,7 +33,7 @@ class CategoryController extends AbstractController
         // find all products in the category, display last added in first position
         $products = $productRepository->findBy(['category' => $category], ['updated_at' => 'DESC']);
         // find all categories
-        $categories = $categoryRepository->findBy([], ['id' => 'ASC']);
+        $categories = $categoryRepository->findBy([], ['name' => 'ASC']);
 
         return $this->render('category/list.html.twig', [
             'category' => $category,

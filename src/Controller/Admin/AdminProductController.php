@@ -7,6 +7,7 @@ use App\Form\ProductFormType;
 use App\Repository\ProductRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -14,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
 #[Route('/admin/products', name: 'admin_products_')]
-class ProductsController extends AbstractController
+class AdminProductController extends AbstractController
 {
     #[Route('/', name: 'index')]
     public function index(ProductRepository $productRepository,): Response
@@ -22,7 +23,7 @@ class ProductsController extends AbstractController
         // find all products
         $products = $productRepository->findBy([], ['updated_at' => 'DESC']);
 
-        return $this->render('admin/products/index.html.twig', [
+        return $this->render('admin/product/index.html.twig', [
             'products' => $products
         ]);
     }
@@ -123,7 +124,7 @@ class ProductsController extends AbstractController
 
         }
 
-        return $this->render('admin/products/add.html.twig', [
+        return $this->render('admin/product/add.html.twig', [
             'productForm' => $productForm->createView()
         ]);
     }
@@ -181,6 +182,28 @@ class ProductsController extends AbstractController
             $slug = $slugger->slug($product->getName())->lower();
             $product->setSlug($slug);
 
+            $imageName = $product->getImage();
+            /** @var UploadedFile $imageFile */
+            $imageFile = $productForm->get('image')->getData();
+            
+            // if Image file already exists and you add Image to the 'image' field
+            if($imageName != null && $imageFile != null) {
+                /**
+                 * Delete image file from uploads directory
+                 */
+                //get image name
+                $imageFile = $product->getImage();
+                // create instance of Filesystem
+                $fileSystem = new Filesystem();
+                // remove the file from the directory where images are stored
+                try {
+                    $productsImageDir = $this->getParameter('products_images_directory');
+                    $fileSystem->remove($productsImageDir.'/'.$imageFile);
+                } catch (FileException $e) {
+                    // ... handle exception if something happens during file upload
+                }
+            }
+
             /** @var UploadedFile $imageFile */
             $imageFile = $productForm->get('image')->getData();
 
@@ -219,7 +242,7 @@ class ProductsController extends AbstractController
 
         }
 
-        return $this->render('admin/products/edit.html.twig', [
+        return $this->render('admin/product/edit.html.twig', [
             'productForm' => $productForm->createView()
         ]);
     }
@@ -232,7 +255,22 @@ class ProductsController extends AbstractController
     {
         // if product exists
         if($product){
-            // delete product
+            /**
+             * Delete image file from uploads directory
+             */
+            //get image name
+            $imageFile = $product->getImage();
+            // create instance of Filesystem
+            $fileSystem = new Filesystem();
+            // remove the file from the directory where images are stored
+            try {
+                $productsImageDir = $this->getParameter('products_images_directory');
+                $fileSystem->remove($productsImageDir.'/'.$imageFile);
+            } catch (FileException $e) {
+                // ... handle exception if something happens during file upload
+            }
+
+            // delete product from database
             $entityManager->remove($product);
             // execute transaction
             $entityManager->flush();
@@ -247,7 +285,7 @@ class ProductsController extends AbstractController
         //redirect to products list
         return $this->redirectToRoute('admin_products_index');
 
-        return $this->render('admin/products/index.html.twig', [
+        return $this->render('admin/product/index.html.twig', [
             
         ]);
     }

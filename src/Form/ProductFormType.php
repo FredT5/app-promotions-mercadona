@@ -22,7 +22,10 @@ class ProductFormType extends AbstractType
     {
         $builder
             ->add('name', options: [
-                'label' => 'Nom'
+                'label' => 'Nom',
+                'attr' => [
+                    'autofocus' => true
+                ]
             ])
             ->add('description')
             ->add('price', MoneyType::class, options: [
@@ -71,17 +74,17 @@ class ProductFormType extends AbstractType
                 // in the associated entity, so we can use the PHP constraint classes
                 'constraints' => [
                     new File([
-                        'maxSize' => '100k',
-                        'maxSizeMessage' => 'Image trop lourde, il ne faut pas dépassé 100 ko.',
                         'extensions' => [
                             'jpg',
                             'jpeg',
                             'png',
                             'gif'
                         ],
-                        'mimeTypesMessage' => 'Format d\'image incorrect. Les formats jpg, jpeg, png et gif sont autorisés.',
+                        'extensionsMessage' => 'Format d\'image incorrect. Les formats jpg, jpeg, gif et png sont autorisés.',
                     ]),
                     new Image([
+                        'maxSize' => '100k',
+                        'maxSizeMessage' => 'Image trop lourde, il ne faut pas dépassé 100 ko.',
                         'allowLandscape' => false,
                         'allowLandscapeMessage' =>'L\'image doit être au format carré',
                         'allowPortrait' => false,

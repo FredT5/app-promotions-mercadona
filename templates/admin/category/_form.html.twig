@@ -1,0 +1,8 @@
+{{form_start(categoryForm, {'attr': {'novalidate': 'novalidate'}})}}
+    <div class="row">
+        {{form_row(categoryForm.name)}}
+        <div class="d-grid gap-2 col-6 mx-auto mt-2">
+            <button type="submit" class="btn btn-primary btn-lg">{{button_label |default('Ajouter')}}</button>
+        </div>
+    </div>
+{{form_end(categoryForm)}}
