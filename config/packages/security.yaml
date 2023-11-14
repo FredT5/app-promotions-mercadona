@@ -33,6 +33,7 @@ security:
     access_control:
         - { path: ^/admin/users, roles: ROLE_ADMIN }
         - { path: ^/admin/products, roles: ROLE_PRODUCT_ADMIN }
+        - { path: ^/admin/categories, roles: ROLE_PRODUCT_ADMIN }
 
     role_hierarchy:
         ROLE_PRODUCT_ADMIN: ROLE_USER
