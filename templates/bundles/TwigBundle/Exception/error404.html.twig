@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Erreur 404{% endblock %}
+
+{% block body %}
+    <!-- Header -->
+    <header class="bg-success py-2">
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="text-center text-white">
+                <h1 class="display-4 fw-bolder">Oops ! {% block message %}Cette page est introuvable.{% endblock %}</h1>
+                <img src="{{asset('assets/images/lost-travolta.gif')}}" class="mt-4" alt="Perdu ?" height="200">
+            </div>
+        </div>
+    </header>
+
+{% endblock %}
