@@ -22,10 +22,10 @@ class UsersFixtures extends Fixture
     {
         // create admin
         $admin = new Users();
-        $admin->setEmail('admin@yopmail.com')
+        $admin->setEmail('jose@yopmail.com')
               ->setLastname('Totée')
-              ->setFirstname('Frédéric')
-              ->setPassword($this->passwordEncoder->hashPassword($admin, 'admin!'))
+              ->setFirstname('José')
+              ->setPassword($this->passwordEncoder->hashPassword($admin, 'Admin8910!!'))
               ->setRoles(['ROLE_ADMIN']);
 
         $manager->persist($admin);
@@ -40,7 +40,7 @@ class UsersFixtures extends Fixture
             $user->setEmail("user$i@yopmail.com")
                  ->setFirstname($faker->firstName)
                  ->setLastname($faker->lastName)
-                 ->setPassword($this->passwordEncoder->hashPassword($user, 'user!'))
+                 ->setPassword($this->passwordEncoder->hashPassword($user, 'Users4567!!'))
                  ->setRoles(['ROLE_PRODUCT_ADMIN']);
 
             $manager->persist($user);

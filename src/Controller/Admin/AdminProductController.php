@@ -280,7 +280,7 @@ class AdminProductController extends AbstractController
         // if there isn't a product with this id
         else {
             // display error message
-            $this->addFlash('success', 'Le produit n\'existe pas.');
+            $this->addFlash('danger', 'Le produit n\'existe pas.');
         }
         //redirect to products list
         return $this->redirectToRoute('admin_products_index');

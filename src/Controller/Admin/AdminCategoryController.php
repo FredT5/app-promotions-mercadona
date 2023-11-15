@@ -103,4 +103,33 @@ class AdminCategoryController extends AbstractController
             'categoryForm' => $categoryForm->createView()
         ]);
     }
+
+    #[Route('/delete/{id}', name: 'delete')]
+    public function delete(
+        Category $category,
+        EntityManagerInterface $entityManager
+    ): Response
+    {
+        // if category exists
+        if($category){
+
+            // delete category from database
+            $entityManager->remove($category);
+            // execute transaction
+            $entityManager->flush();
+            // and display success message
+            $this->addFlash('success', 'Catégorie supprimé avec succès');
+        } 
+        // if there isn't a category with this id
+        else {
+            // display error message
+            $this->addFlash('danger', 'La catégorie n\'existe pas.');
+        }
+        //redirect to categorys list
+        return $this->redirectToRoute('admin_categories_index');
+
+        return $this->render('admin/category/index.html.twig', [
+            
+        ]);
+    }
 }

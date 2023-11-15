@@ -40,7 +40,7 @@
                         <tr>
                             <th scope="row">{{product.id}}</th>
                             <td>{{product.name}}</td>
-                            <td>{{product.category.name}}</td>
+                            <td>{% if product.category.name is defined %}{{product.category.name}}{% endif %}</td>
                             <td>{{product.price}} €</td>
 
                             {# If no discount #}
@@ -54,12 +54,12 @@
                             <td></td>
                             {# If there is a discount #}
                             {# Future discount #}
-                            {% elseif (product.discount > 0) and (product.discountStart | date >= "now" | date) and (product.discountEnd | date >= "now" | date) %}
+                            {% elseif (product.discount > 0) and (product.discountStart|date('U') >= "now"|date('U')) and (product.discountEnd|date('U') >= "now"|date('U')) %}
                             <td class="text-primary fw-bolder">{{product.discount}} %</td>
                             <td class="text-primary">{{ product.discountStart | date("d/m/Y") }}</td>
                             <td class="text-primary">{{ product.discountEnd | date("d/m/Y") }}</td>
                             {# Active discount #}
-                            {% elseif (product.discount > 0) and (product.discountStart | date <= "now" | date) and (product.discountEnd | date >= "now" | date) %}
+                            {% elseif (product.discount > 0) and (product.discountStart|date('U') <= "now"|date('U')) and (product.discountEnd|date('U') >= "now"|date('U')) %}
                             <td class="text-danger fw-bolder">{{product.discount}} %</td>
                             <td class="text-danger">{{ product.discountStart | date("d/m/Y") }}</td>
                             <td class="text-danger">{{ product.discountEnd | date("d/m/Y") }}</td>
