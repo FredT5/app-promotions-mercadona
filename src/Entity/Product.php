@@ -58,7 +58,7 @@ class Product
     private ?string $image = null;
 
     #[ORM\ManyToOne(inversedBy: 'products')]
-    #[ORM\JoinColumn(nullable: false)]
+    #[ORM\JoinColumn(onDelete: 'SET NULL')]
     #[Assert\NotBlank(message: 'La catégorie ne peut pas être vide')]
     private ?Category $category = null;
 

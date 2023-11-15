@@ -44,13 +44,19 @@
                         <div class="card-body p-4">
                             <div class="text-center">
                                 <!-- Product category -->
-                                <small class="text-success">{{product.category.name}}</small>
+                                <small class="text-success">
+                                    {% if product.category.name is defined %}
+                                        {{product.category.name}}
+                                    {% else %}
+                                        &nbsp;
+                                    {% endif %}                                    
+                                </small>
                                 <!-- Product name -->
                                 <h5 class="fw-bolder">{{product.name}}</h5>
                                 <!-- Product description -->
                                 <p>{{ product.description|u.truncate(100, '...', false) }}</p>
                                 <!-- Product price -->
-                                <span {% if (product.discount > 0) and (product.discountStart | date <= "now" | date) and (product.discountEnd | date >= "now" | date) %}class="text-danger fw-bolder"{% endif %}>{{(product.price) |number_format(2, ',', '')}} €</span>
+                                <span {% if (product.discount > 0) and (product.discountStart|date('U') <= "now"|date('U')) and (product.discountEnd|date('U') >= "now"|date('U')) %}class="text-danger fw-bolder"{% endif %}>{{(product.price) |number_format(2, ',', '')}} €</span>
                             </div>
                         </div>
                     </div>
