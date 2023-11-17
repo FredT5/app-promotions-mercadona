@@ -56,7 +56,14 @@
                                 <!-- Product description -->
                                 <p>{{ product.description|u.truncate(100, '...', false) }}</p>
                                 <!-- Product price -->
-                                <span {% if (product.discount > 0) and (product.discountStart|date('U') <= "now"|date('U')) and (product.discountEnd|date('U') >= "now"|date('U')) %}class="text-danger fw-bolder"{% endif %}>{{(product.price) |number_format(2, ',', '')}} €</span>
+                                {# if discount is live on this product #} 
+                                {% if (product.discount > 0) and (product.discountStart|date('U') <= "now"|date('U')) and (product.discountEnd|date('U') >= "now"|date('U')) %}
+                                {# show discount price #} 
+                                <span class="text-danger fw-bolder">{{(product.price - (product.price * product.discount / 100)) |number_format(2, ',', '')}} €</span>
+                                {% else %}
+                                {# show regular price #} 
+                                <span>{{(product.price) |number_format(2, ',', '')}} €</span>
+                                {% endif %}
                             </div>
                         </div>
                     </div>

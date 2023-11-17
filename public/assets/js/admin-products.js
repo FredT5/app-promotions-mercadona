@@ -6,12 +6,12 @@ function updatePriceDiscount(){
     var priceDiscountDiv = $('#product_form_price_help');
     var priceDiscountText = $('#product_form_price_discount');
     
-    // calcule le prix remisé remise
+    // calculate price with discount
     var priceDiscount = price - (price*discount/100);
-    // met en forme la remise
+    // format price with discount with 2 decimal
     priceDiscountText.text((priceDiscount).toFixed(2));
     
-    // Montrer le prix remisé que s'il y a une remise valable
+    // if product discount is live show price with discount
     if ((priceDiscount <= 0 || discount <= 0) && (discount != 100) || (price == 0)) {
         priceDiscountDiv.hide();
     } else if (isNaN(priceDiscount)) {
@@ -27,7 +27,7 @@ $(document).ready(function(){
     var hiddenInput = $('#product_form_hidden_input_discount');
     var toggle = false;
 
-    // Initialiser l'affichage des champs remise s'il y a une remise
+    // discount inputs display init
     if (discount == 0) {
         hiddenInput.hide();
         toggle = false;
@@ -35,7 +35,7 @@ $(document).ready(function(){
         hiddenInput.show();
         toggle = true;
     }
-
+    // discount inputs display
     function displayDiscountInput() {
         var button = document.getElementById("btDiscount");
         var discountInput = $('#product_form_discount');
@@ -68,15 +68,16 @@ $(document).ready(function(){
     }
 
     displayDiscountInput();
-
+    updatePriceDiscount ();
+    // discount inputs display on click on discount button
     $('#btDiscount').click(function() {
         displayDiscountInput();
     });
-
+    // update price with discount when discount input value change
     $('#product_form_discount').on('keyup change', function(){
         updatePriceDiscount ();
     });
-
+    // update price with discount when discount input value change
     $('#product_form_price').on('keyup change', function(){
         updatePriceDiscount ();
     });
