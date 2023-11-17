@@ -51,6 +51,8 @@ use SlugTrait;
 Projet développé avec:
 
 * [Symfony](https://symfony.com/) - Framework PHP Symfony
+* [Bootstrap](https://getbootstrap.com/docs/5.2/getting-started/introduction/) - HTML CSS JS library
+* [Jquery](https://jquery.com/) - JS library
 
 Bundle used for this project : 
 
