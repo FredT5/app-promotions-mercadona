@@ -284,9 +284,5 @@ class AdminProductController extends AbstractController
         }
         //redirect to products list
         return $this->redirectToRoute('admin_products_index');
-
-        return $this->render('admin/product/index.html.twig', [
-            
-        ]);
     }
 }

@@ -4,7 +4,7 @@ Mercadona Promotions App is a web application to manage and display promotions o
 
 ## Development environment
 
-### Requirements
+### Pre-Requirements
 
 * PHP 8.1
 * PostgreSQL
@@ -22,7 +22,7 @@ symfony check:requirements
 symfony serve -d
 ```
 
-### Display test data
+### Fixtures
 
 ```bash
 symfony console doctrine:fixtures:load
@@ -39,3 +39,23 @@ php bin/phpunit --testdox
 ```bash
 php bin/phpunit --coverage-html var/log/test/test-coverage
 ```
+
+### CreatedAt and Slug Trait
+```bash
+use CreatedAtTrait;
+use SlugTrait;
+```
+
+## Made with
+
+Projet développé avec:
+
+* [Symfony](https://symfony.com/) - Framework PHP Symfony
+
+Bundle used for this project : 
+
+- SecurityBundle [Documentation SecurityBundle] https://symfony.com/doc/current/security.html
+- DoctrineFixturesBundle [Documentation DoctrineFixturesBundle](https://symfony.com/doc/current/bundles/DoctrineFixturesBundle/index.html) 
+
+
+

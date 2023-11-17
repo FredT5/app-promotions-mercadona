@@ -127,9 +127,5 @@ class AdminCategoryController extends AbstractController
         }
         //redirect to categorys list
         return $this->redirectToRoute('admin_categories_index');
-
-        return $this->render('admin/category/index.html.twig', [
-            
-        ]);
     }
 }
