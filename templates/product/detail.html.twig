@@ -3,37 +3,32 @@
 {% block title %}{{product.name}}{% endblock %}
 
 {% block body %}
-    <!-- Header -->
-    <header class="bg-success py-2">
-        <div class="container px-4 px-lg-5 my-5">
-            <div class="text-center text-white">
-                <h1 class="display-4 fw-bolder">{{product.name}}</h1>
-            </div>
-        </div>
-    </header>
 
-    <!-- Section -->
-    <section class="py-2">
-        <div class="container px-4 px-lg-5 mt-5">
-            <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                <div class="col mb-5">
-                    <div class="card h-100">
-                        <!-- Product image -->
-                        <img class="card-img-top" src="{{asset(product.image)}}" alt="..." />
-                        <!-- Product details -->
-                        <div class="card-body p-4">
-                            <div class="text-center">
-                                <!-- Product category -->
-                                <small class="text-success">{{product.category.name}}</small>
-                                <!-- Product name -->
-                                <h5 class="fw-bolder">{{product.name}}</h5>
-                                <!-- Product description -->
-                                <p>{{product.description}}</p>
-                                <!-- Product price -->
-                                <span {% if product.discount > 0 %}class="text-danger fw-bolder"{% endif %}>{{(product.price / 100) |number_format(2, ',', '')}} €</span>
-                            </div>
-                        </div>
+    <!-- Product section-->
+    <section class="py-5">
+        <div class="container px-4 px-lg-5 my-5">
+            <div class="row gx-4 gx-lg-5 align-items-center">
+                <!-- Product image -->
+                <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="{{asset('uploads/products-images/' ~ product.image)}}" alt="..." /></div>
+                <!-- Product details -->
+                <div class="col-md-6">
+                    <!-- Product category -->
+                    <small class="text-success">{{product.category.name}}</small>
+                    <!-- Product name -->
+                    <h1 class="display-5 fw-bolder">{{product.name}}</h1>
+                    <!-- Product price -->
+                    <div class="fs-5 mb-5">
+                        {# if discount is live on this product #} 
+                        {% if (product.discount > 0) and (product.discountStart|date('U') <= "now"|date('U')) and (product.discountEnd|date('U') >= "now"|date('U')) %}
+                        {# show discount price #} 
+                        <h3 class="text-danger fw-bolder">{{(product.price - (product.price * product.discount / 100)) |number_format(2, ',', '')}} €</h3>
+                        {% else %}
+                        {# show regular price #} 
+                        <h3>{{(product.price) |number_format(2, ',', '')}} €</h3>
+                        {% endif %}
                     </div>
+                    <!-- Product description -->
+                    <p class="lead">{{product.description}}</p>
                 </div>
             </div>
         </div>

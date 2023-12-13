@@ -52,7 +52,9 @@
                                     {% endif %}                                    
                                 </small>
                                 <!-- Product name -->
-                                <h5 class="fw-bolder">{{product.name}}</h5>
+                                <a href="{{path('product_detail', {slug: product.slug})}}">
+                                    <h5 class="fw-bolder">{{product.name}}</h5>
+                                </a>
                                 <!-- Product description -->
                                 <p>{{ product.description|u.truncate(100, '...', false) }}</p>
                                 <!-- Product price -->
